@@ -1,0 +1,42 @@
+<?php
+session_start();
+function redirect($URL)
+
+{
+
+  //echo "<script type='text/javascript'>window.location='".$URL."'</script>";
+	//header('location:'.$URL);
+
+exit;
+
+} 
+
+if(isset($_POST['submit']))
+{
+$name=$_POST['title'];
+if($name=='')
+{
+$_SESSION['msg'] = "enter Your Name!";
+//redirect('error_message.php');
+//exit;
+header("location:error_message.php");
+exit;
+}
+else{
+$_SESSION['msg'] = "Success";
+redirect('error_message.php');
+}
+}
+?>
+<form name="myform" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+Name : <input  type="text"    name="title" id="title" />
+<p> <?
+if($_SESSION['msg'])
+{
+echo $_SESSION['msg'];
+$_SESSION['msg'] = "";
+}
+
+?> </p>
+<input type="submit" value="submit" name="submit"/>
+</form>
